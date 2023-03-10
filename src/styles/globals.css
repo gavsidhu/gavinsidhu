@@ -1,3 +1,7 @@
+body {
+  background-color: #303030;
+}
+
 .container {
   margin-right: auto;
   margin-left: auto;
@@ -8,24 +12,34 @@
 .navbarContainer {
   margin-right: auto;
   margin-left: auto;
-  max-width: 1280px;
+  max-width: 1024px;
   padding: 0 16px 16px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 4px 20px 20px 0px;
+  color: #e7e2df;
 }
 
 .navbar {
-  padding: 8px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 4px;
   display: flex;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border: 0.5px gray solid;
+  border-radius: 50px;
 }
 
 .navLink {
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: 12px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  color: black;
+  font-size: medium;
+}
+
+.navLinkCurrent {
+  background-color: gray;
 }
 
 .socialLinks {
@@ -36,8 +50,12 @@
 .socialIcon {
   width: 20px;
   height: 20px;
-  color: black;
+  color: #e7e2df;
   margin-left: 24px;
+}
+
+.socialIcon:hover {
+  transform: scale(1.08);
 }
 
 .homeGrid {
@@ -48,13 +66,20 @@
 }
 
 .card {
-  background-color: antiquewhite;
+  background-color: #e7e2df;
   padding: 24px;
   border-radius: 20px;
 }
 .cardLink:hover {
   transform: scale(0.98);
   cursor: pointer;
+}
+
+.projectImage {
+width: 500px;
+margin-left: auto;
+margin-right: auto;
+
 }
 
 .cardLg {

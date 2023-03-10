@@ -10,39 +10,54 @@ const Navbar = () => {
       <div className='navbarName'>
         <h1>Gavin Sidhu</h1>
       </div>
-      <div>
+      {/* <div>
         <nav>
           <div className='navbar'>
-            <a className='navLink'>
+            <Link href='#' 
+            className={`${typeof window !== "undefined" && window.location.pathname === "/"?
+            "navLink navLinkCurrent"
+            :
+            "navLink"}`}
+            >
               <div>Home</div>
-            </a>
-            <a className='navLink'>
+            </Link>
+            <Link href='/projects' 
+            className={`${typeof window !== "undefined" && window.location.pathname === "/projects"?
+            "navLink navLinkCurrent"
+            :
+            "navLink"}`}
+            >
               <div>Projects</div>
-            </a>
-            <a className='navLink'>
+            </Link>
+            <Link href='/contact' 
+            className={`${typeof window !== "undefined" && window.location.pathname === "/contact"?
+            "navLink navLinkCurrent"
+            :
+            "navLink"}`}
+            >
               <div>Contact</div>
-            </a>
+            </Link>
           </div>
         </nav>
-      </div>
+      </div> */}
       <div className='socialLinks'>
         <Link
           href="#"
           className='socialIcon'
         >
-          <FaEnvelope className='socialIcon' />
+          <FaEnvelope/>
         </Link>
         <Link
           href="#"
           className='socialIcon'
         >
-          <FaGithub className='socialIcon' />
+          <FaGithub />
         </Link>
         <Link
           href="#"
           className='socialIcon'
         >
-          <FaTwitter className='socialIcon' />
+          <FaTwitter />
         </Link>
       </div>
     </div>

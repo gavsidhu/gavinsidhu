@@ -21,13 +21,38 @@ export default function Home() {
         <Container>
           <div className='homeGrid'>
             <Card className='cardLg'>
-              <h1 className='displayHeading'>Gavin Sidhu</h1>
-              <p>I’ve loved making things for as long as I can remember, and wrote my first program when I was 6 years old, just two weeks after my mom brought home the brand new Macintosh LC 550 that I taught myself to type on.</p>
-              <p>The only thing I loved more than computers as a kid was space. When I was 8, I climbed the 40-foot oak tree at the back of our yard while wearing my older sister’s motorcycle helmet, counted down from three, and jumped — hoping the tree was tall enough that with just a bit of momentum I’d be able to get to orbit.</p>
+              <h1 className='displayHeading'>Hi, I'm Gavin, a self-taught full stack developer.</h1>
+              <div className='lineBreak'></div>
+              <p>I love tackling complex problems and finding creative solutions. Whether it's a small feature or a full-fledged application, I enjoy the challenge of making it work seamlessly.</p>
+              <p>As a self-taught developer, I've learned how to work independently, solve complex problems, and continuously improve my skills through hands-on experience and self-study. I believe that technology has the power to make a positive impact on people's lives, and I'm always looking for new and exciting ways to create solutions that make a difference.</p>
+              <p>In my free time, you can find me tinkering with new technologies, reading about the latest trends in web development, or working on personal projects that challenge me to learn and grow. Whether it's building a website from scratch or optimizing a complex application, I always strive to deliver high-quality results that exceed expectations.</p>
             </Card>
-            <Card className='cardMd cardLink'>
+            <Card className='cardLg cardLink' >
               <div>
-                I’ve loved making things for as long as I can remember, and wrote my first program when I was 6 years old, just two weeks after my mom brought home the brand new Macintosh LC 550 that I taught myself to type on.
+              <h1 className='displayHeading'>Story Starters</h1>
+              <p>Description of project</p>
+              <div className='lineBreak'></div>
+              <div className='projectImage'>
+                <img
+                alt='Story Starters'
+                src="/story-starters.png"
+                style={{width: "100%"}}
+                />
+              </div>
+              </div>
+            </Card>
+            <Card className='cardLg cardLink' >
+              <div>
+              <h1 className='displayHeading'>Optibot</h1>
+              <p>Description of project</p>
+              <div className='lineBreak'></div>
+              <div className='projectImage'>
+                <img
+                alt='Story Starters'
+                src="/story-starters.png"
+                style={{width: "100%"}}
+                />
+              </div>
               </div>
             </Card>
           </div>

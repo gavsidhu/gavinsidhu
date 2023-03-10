@@ -1,15 +1,16 @@
 import { type } from 'os'
 import React, { MouseEventHandler, ReactNode, useState } from 'react'
 
-type Props = {
+interface Props {
     className?: string
     children: ReactNode
 }
 
-const Card = ({ className, children }: Props) => {
+const Card = ({ className, children, ...props }: Props) => {
     return (
         <div
             className={`card ${className}`}
+            {...props}
         >
             {children}
         </div>
