@@ -1,11 +1,19 @@
 body {
-  background-color: #303030;
+  background-color: #e6e6e6;
+  font-family: 'Inter', sans-serif;
 }
 
+
+a:visited{
+  color: inherit;
+}
+a {
+  text-decoration: none;
+}
 .container {
   margin-right: auto;
   margin-left: auto;
-  max-width: 1280px;
+  max-width: 1024px;
   padding: 0 16px 16px 0;
 }
 
@@ -16,10 +24,10 @@ body {
   padding: 0 16px 16px 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 4px 20px 20px 0px;
-  color: #e7e2df;
+  color: black;
 }
 
 .navbar {
@@ -50,7 +58,7 @@ body {
 .socialIcon {
   width: 20px;
   height: 20px;
-  color: #e7e2df;
+  color: black;
   margin-left: 24px;
 }
 
@@ -58,33 +66,61 @@ body {
   transform: scale(1.08);
 }
 
+.flexRow {
+padding-bottom: 20px;
+}
+
 .homeGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
-  gap: 16px;
+  gap: 20px;
 }
 
 .card {
-  background-color: #e7e2df;
+  background-color: white;
   padding: 24px;
   border-radius: 20px;
 }
-.cardLink:hover {
-  transform: scale(0.98);
-  cursor: pointer;
+
+.externalLink {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+
+.cardLink {
+  position: relative;
+  background: linear-gradient(215deg, white, white 50%, #303030 50%, #303030);
+  background-size: 100% 300%; /* Increase the background size to create more smooth gradient effect */
+  transition: background .5s;
+  color: black;
+}
+
+.cardContent {
+  transition: transform 0.25s ease-in-out;
+}
+
+.cardLink:hover .cardContent{
+  transform: scale(1.02);
+  
 }
 
 .projectImage {
-width: 500px;
+width: 80%;
 margin-left: auto;
 margin-right: auto;
-
 }
 
 .cardLg {
+  position: relative;
   grid-column: span 2; /* The card will span 2 columns */
   grid-row: span 2; /* The card will span 1 row */
+  max-width: 100%;
 }
 
 .cardMd {
@@ -104,9 +140,17 @@ margin-right: auto;
   margin-bottom: 24px;
   background-color: rgba(0, 0, 0, 0.06);
 }
-
-@media (min-width: 640px) {
+@media (max-width: 640px) {
+  .homeGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 16px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media (min-width: 768px) {
+
 }

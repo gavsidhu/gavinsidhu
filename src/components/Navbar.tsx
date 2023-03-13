@@ -7,9 +7,9 @@ const navigation = []
 const Navbar = () => {
   return (
     <div className='navbarContainer'>
-      <div className='navbarName'>
+      {/* <div className='navbarName'>
         <h1>Gavin Sidhu</h1>
-      </div>
+      </div> */}
       {/* <div>
         <nav>
           <div className='navbar'>
