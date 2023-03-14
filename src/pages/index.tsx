@@ -12,8 +12,7 @@ export default function Home() {
   return (
     <>
       <Head>
-      <title>Optibot</title>
-        <meta name="description" content="Optibot is a VS Code extention that generates documentation for your code and refactors your code" />
+      <title>Gavin Sidhu</title>
       </Head>
       <header>
         <Navbar />
