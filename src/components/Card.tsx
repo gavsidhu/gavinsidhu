@@ -1,6 +1,5 @@
-import { type } from "os";
 import React, { MouseEventHandler, ReactNode, useState } from "react";
-import { FaExternalLinkAlt } from "react-icons/fa";
+
 
 interface Props {
   className?: string;
