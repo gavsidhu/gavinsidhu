@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700');
+
 body {
   background-color: #e6e6e6;
   font-family: 'Inter', sans-serif;
 }
 
-
-a:visited{
+a:visited {
   color: inherit;
 }
 
@@ -12,15 +13,69 @@ a {
   text-decoration: none;
 }
 
-p {
-font-size: 16px;
+.heroSection {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  align-items: center;
+}
+
+.heroContentContainer {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.heroParagraph {
+  font-size: 18px;
+  line-height: 160%;
+  max-width: 90%;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.techStackGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px 24px;
+  padding-bottom: 32px;
+  margin-top: 12px;
+}
+
+.offset {
+  transform: translateY(32px);
+}
+
+.techStackItemContainer {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.teckStackIcon {
+  width: 48px;
+  height: 48px;
+  color: black;
+}
+
+.additionalStackContainer {
+  padding: 32px 12px 16px 12px;
+  text-align: center;
+}
+
+.additionalStackIcon {
+  width: 24px;
+  height: 24px;
+  color: black;
+  margin-right: 24px;
 }
 
 .container {
   margin-right: auto;
   margin-left: auto;
   max-width: 1024px;
-  padding: 0 16px 16px 0;
 }
 
 .navbarContainer {
@@ -58,34 +113,37 @@ font-size: 16px;
 
 .socialLinks {
   display: flex;
-  padding: 4px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .socialIcon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   color: black;
-  margin-left: 24px;
+  margin-right: 24px;
 }
 
 .socialIcon:hover {
   transform: scale(1.08);
 }
 
-.flexRow {
-padding-bottom: 20px;
-}
-
 .homeGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
-  gap: 20px;
+  gap: 32px;
+  padding-bottom: 64px;
+}
+
+.homeGrid p {
+  font-size: 18px;
+  line-height: 160%;
 }
 
 .card {
   background-color: white;
-  padding: 24px;
+  padding: 36px 32px 36px 32px;
   border-radius: 20px;
 }
 
@@ -98,12 +156,8 @@ padding-bottom: 20px;
   transition: transform 0.3s ease;
 }
 
-
 .cardLink {
   position: relative;
-  background: linear-gradient(215deg, white, white 50%, #303030 50%, #303030);
-  background-size: 100% 300%; /* Increase the background size to create more smooth gradient effect */
-  transition: background .5s;
   color: black;
 }
 
@@ -111,15 +165,14 @@ padding-bottom: 20px;
   transition: transform 0.25s ease-in-out;
 }
 
-.cardLink:hover .cardContent{
-  transform: scale(1.02);
-  
+.cardLink:hover .cardContent {
+  transform: scale(1.01);
 }
 
 .projectImage {
-width: 80%;
-margin-left: auto;
-margin-right: auto;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cardLg {
@@ -135,7 +188,7 @@ margin-right: auto;
 }
 
 .displayHeading {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
 }
 
@@ -155,8 +208,13 @@ margin-right: auto;
     margin-left: auto;
     margin-right: auto;
   }
+
+  .container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1024px;
+  }
 }
 
 @media (min-width: 768px) {
-
 }
