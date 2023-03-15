@@ -42,19 +42,19 @@ const Navbar = () => {
       </div> */}
       <div className='socialLinks'>
         <Link
-          href="#"
+          href="mailto:gavinjeet.sidhu@gmail.com"
           className='socialIcon'
         >
           <FaEnvelope/>
         </Link>
         <Link
-          href="#"
+          href="https://github.com/gavsidhu"
           className='socialIcon'
         >
           <FaGithub />
         </Link>
         <Link
-          href="#"
+          href="https://twitter.com/gav_sidhu"
           className='socialIcon'
         >
           <FaTwitter />
