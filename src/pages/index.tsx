@@ -72,7 +72,7 @@ export default function Home() {
               <div style={{ display: 'grid', gridTemplateColumns: ".75fr 1fr", alignItems: 'center', padding: '36px 24px 36px 24px' }}>
                 <div style={{ marginLeft: "auto", marginRight: "auto" }}>
                   <h2 className='displayHeading'>Story Starters</h2>
-                  <p>AI story writer that helps fiction writer plan and write their stories. </p>
+                  <p>AI story writer that helps fiction writers plan and write their stories. </p>
                 </div>
                 <div className='projectImage'>
                   <img
