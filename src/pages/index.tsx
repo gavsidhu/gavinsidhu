@@ -131,7 +131,7 @@ export default function Home() {
                 </div>
               </div>
             </Card>
-            <Card className="cardMd cardLink" link="https://www.thedevelab.co">
+            <Card className="cardMd cardLink" link="https://www.thedevlab.co">
               <div
                 style={{
                   display: "grid",
