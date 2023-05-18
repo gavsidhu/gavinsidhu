@@ -4,7 +4,7 @@ import Container from "@/components/Container";
 import Navbar from "@/components/Navbar";
 import Card from "@/components/Card";
 import Link from "next/link";
-import { FaEnvelope, FaGithub, FaTwitter } from "react-icons/fa";
+import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import {
   SiExpress,
   SiFirebase,
@@ -45,6 +45,9 @@ export default function Home() {
                 </Link>
                 <Link href='https://twitter.com/gav_sidhu'>
                   <FaTwitter className='socialIcon' />
+                </Link>
+                <Link href='https://www.linkedin.com/in/gavinjeetsidhu/'>
+                  <FaLinkedin className='socialIcon' />
                 </Link>
               </div>
             </div>
