@@ -90,7 +90,7 @@ export default function Index() {
         setData(originalData.activities);
     };
 
-    if (!originalData || originalData.activities.length === 0) {
+    if (!originalData || originalData.activities.length === 0 || originalData.activities === null) {
         return (
             <h1 className="text-lg text-white">No activity to display</h1>
         )
