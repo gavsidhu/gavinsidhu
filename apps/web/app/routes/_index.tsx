@@ -22,7 +22,7 @@ export const meta: MetaFunction = () => {
         },
         {
             property: "og:image",
-            content: `http://localhost:3000/og.png`
+            content: `https://www.gavinsidhu.com/og.png`
         }
     ];
 };
@@ -33,7 +33,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     const page = url.searchParams.get('page') || 1;
     const pageSize = url.searchParams.get('pageSize') || 15;
     try {
-        const response = await fetch(`http://localhost:3333/activity?page=${page}&pageSize=${pageSize}`, {
+        const response = await fetch(`${process.env.BACKEND_URL as string}/activity?page=${page}&pageSize=${pageSize}`, {
             method: "GET",
             headers: {
                 "Authorization": process.env.AUTH_TOKEN as string

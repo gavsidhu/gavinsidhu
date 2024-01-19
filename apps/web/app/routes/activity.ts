@@ -2,9 +2,9 @@ import { LoaderFunction, json } from '@remix-run/node';
 
 export const loader: LoaderFunction = async () => {
     try {
-        const goChiServerUrl = 'http://localhost:3333/activity';
+        const serverUrl = `${process.env.BACKEND_URL as string}/activity`;
 
-        const response = await fetch(goChiServerUrl, {
+        const response = await fetch(serverUrl, {
             method: 'GET',
             headers: {
                 'Authorization': process.env.AUTH_TOKEN as string

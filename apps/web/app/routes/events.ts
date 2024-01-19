@@ -1,7 +1,7 @@
 import { LoaderFunction } from "@remix-run/node";
 
 export const loader: LoaderFunction = async () => {
-    const url = 'http://localhost:3333/activity/sse';
+    const url = `${process.env.BACKEND_URL as string}/activity/sse`;
     const response = await fetch(url, {
         headers: {
             'Authorization': process.env.AUTH_TOKEN as string
