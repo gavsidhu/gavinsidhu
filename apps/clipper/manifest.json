@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "Clipper",
+    "description": "Custom web clipper",
+    "version": "1.0",
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "cookies",
+        "contextMenus"
+    ],
+    "host_permissions": [
+        "http://localhost:3000/*",
+        "http://localhost:3333/*",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "action": {
+        "default_title": "Clipper",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "service_worker": "background.js"
+    }
+}
