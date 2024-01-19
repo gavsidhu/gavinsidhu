@@ -71,7 +71,7 @@ export default function Index() {
     }, [position]);
 
     useEffect(() => {
-        if (contextData.length === 0) {
+        if (contextData?.length === 0) {
             setData(originalData.activities);
         }
     }, [originalData, contextData, setData]);
@@ -92,7 +92,7 @@ export default function Index() {
 
     if (!originalData || originalData.activities?.length === 0 || originalData.activities === null) {
         return (
-            <h1 className="text-lg text-white">No activity to display</h1>
+            <h1 className="text-lg text-center text-white">No activity to display</h1>
         )
     }
 
