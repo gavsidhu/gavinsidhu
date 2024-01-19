@@ -18,7 +18,7 @@ export const loader: LoaderFunction = async () => {
         const data = await response.json();
         return json(data);
     } catch (error) {
-        console.error('Failed to fetch data from Go Chi server:', error);
+        console.error('Failed to fetch data from server:', error);
         return json({ message: 'Failed to fetch data' }, { status: 500 });
     }
 };
