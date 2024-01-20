@@ -8,14 +8,12 @@ import (
 )
 
 type ActivityRepository struct {
-	DB           *pgxpool.Pool
-	ActivityChan chan string
+	DB *pgxpool.Pool
 }
 
-func NewActivityRepository(pool *pgxpool.Pool, activityChan chan string) *ActivityRepository {
+func NewActivityRepository(pool *pgxpool.Pool) *ActivityRepository {
 	return &ActivityRepository{
-		DB:           pool,
-		ActivityChan: activityChan,
+		DB: pool,
 	}
 }
 
@@ -24,10 +22,6 @@ func (r *ActivityRepository) AddActivity(ctx context.Context, activity models.Cr
 	if err != nil {
 		return err
 	}
-
-	go func() {
-		r.ActivityChan <- "refresh"
-	}()
 
 	return nil
 }

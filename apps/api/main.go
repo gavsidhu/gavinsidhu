@@ -3,13 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
-	"net/http"
 	"os"
 
-	"github.com/gavsidhu/gavinsidhu.com/internal"
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/gavsidhu/gavinsidhu.com/internal/handlers"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/joho/godotenv"
 )
@@ -29,13 +26,8 @@ func main() {
 
 	defer dbpool.Close()
 
-	activityChan := make(chan string)
+	activityHandler := handlers.NewActivityHandler(dbpool)
 
-	r := chi.NewRouter()
-	r.Use(middleware.Logger)
-
-	internal.SetupRoutes(r, context.Background(), dbpool, activityChan)
-
-	log.Fatal(http.ListenAndServe(":3333", r))
+	lambda.Start(activityHandler.LambdaHandler)
 
 }

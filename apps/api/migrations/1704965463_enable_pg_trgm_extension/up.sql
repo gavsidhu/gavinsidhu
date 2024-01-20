@@ -1,3 +1,3 @@
-CREATE EXTENSION pg_trgm;
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
-CREATE INDEX trgm_idx ON activity USING gin (title gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS trgm_idx ON activity USING gin (title gin_trgm_ops);
