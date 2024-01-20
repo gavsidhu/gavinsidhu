@@ -22,13 +22,11 @@ jobs:
         with:
           go-version: '1.20'
 
-      - name: Change to API Directory
-        run: cd apps/api
-
       - name: Build
         run: |
           GOOS=linux GOARCH=amd64 go build -o main .
           zip deployment.zip main
+        working-directory: apps/api
 
       - name: Deploy to AWS Lambda
         env:
@@ -37,5 +35,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           aws lambda update-function-code --function-name gavinsidhu --zip-file fileb://deployment.zip
+        working-directory: apps/api
 
 
