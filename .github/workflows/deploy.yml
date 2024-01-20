@@ -1,0 +1,38 @@
+name: Build and Deploy to AWS Lambda
+
+on:
+  push:
+    branches:
+      - main
+    tags: 
+      - 'v*'
+    paths:
+      - 'apps/api/**'
+
+jobs: 
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.20'
+
+      - name: Build
+        run: |
+          GOOS=linux GOARCH=amd64 go build -o main .
+          zip deployment.zip main
+
+      - name: Deploy to AWS Lambda
+        env:
+          AWS_REGION: 'us-west-2'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws lambda update-function-code --function-name gavinsidhu --zip-file fileb://deployment.zip
+
+
