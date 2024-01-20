@@ -35,7 +35,7 @@ const projects = [
 
 export default function Projects() {
     return (
-        <div className="mx-auto max-w-lg group">
+        <div className="mx-auto max-w-lg group py-4">
             {projects.map((project, idx) => (
                 <ProjectCard key={idx} title={project.title} description={project.description} primaryLanguage={project.primaryLanguage} techStack={project.techStack} href={project.href} />
             ))}
