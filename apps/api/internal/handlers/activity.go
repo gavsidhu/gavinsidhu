@@ -31,6 +31,9 @@ func (h *ActivityHandler) LambdaHandler(ctx context.Context, request events.APIG
 		if request.Path == "/activity" {
 			return h.GetAllActivity(ctx, request)
 		}
+		if request.Path == "/" {
+			return h.Hello(ctx, request)
+		}
 	case "POST":
 		if request.Path == "/activity" {
 			return h.AddActivity(ctx, request)
@@ -44,6 +47,14 @@ func (h *ActivityHandler) LambdaHandler(ctx context.Context, request events.APIG
 	return events.APIGatewayProxyResponse{
 		StatusCode: http.StatusMethodNotAllowed,
 		Body:       http.StatusText(http.StatusMethodNotAllowed),
+	}, nil
+}
+
+func (h *ActivityHandler) Hello(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	return events.APIGatewayProxyResponse{
+		StatusCode: http.StatusUnauthorized,
+		Body:       "Hello",
+		Headers:    map[string]string{"Content-Type": "application/json"},
 	}, nil
 }
 
