@@ -76,15 +76,14 @@ export default function App() {
                                         }
                                     })}
                                 </ul>
-
-                                <div className="flex absolute md:fixed md:bottom-4 bottom-0 items-center space-x-5 mt-6">
+                                <div className="flex justify-center md:absolute md:bottom-4 bottom-0 items-center space-x-5 mt-6 w-full">
                                     <a href="mailto:gavinjeet.sidhu@gmail.com">
                                         <Mail className="h-6 w-6" />
                                     </a>
                                     <a href="https://www.github.com/gavsidhu">
                                         <Icons.gitHub className="h-6 w-6" />
                                     </a>
-                                    < a href="https://www.linkedin.com/in/gavinjeetsidhu/">
+                                    <a href="https://www.linkedin.com/in/gavinjeetsidhu/">
                                         <Linkedin className="h-6 w-6" />
                                     </a>
                                 </div>
