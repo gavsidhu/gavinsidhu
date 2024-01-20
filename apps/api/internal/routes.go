@@ -18,7 +18,6 @@ func SetupRoutes(r chi.Router, ctx context.Context, pool *pgxpool.Pool, activity
 		r.Get("/", activityHandler.GetAllActivity)
 		r.Post("/", activityHandler.AddActivity)
 		r.Post("/search", activityHandler.SearchActivity)
-		r.Get("/sse", activityHandler.SSEHandler)
 	})
 
 }

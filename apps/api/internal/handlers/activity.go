@@ -3,7 +3,6 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -119,36 +118,5 @@ func (h *ActivityHandler) SearchActivity(w http.ResponseWriter, r *http.Request)
 	if err := json.NewEncoder(w).Encode(activities); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
-	}
-}
-
-func (h *ActivityHandler) SSEHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/event-stream")
-	w.Header().Set("Cache-Control", "no-cache")
-	w.Header().Set("Connection", "keep-alive")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
-	flusher, ok := w.(http.Flusher)
-	if !ok {
-		http.Error(w, "Streaming unsupported", http.StatusInternalServerError)
-		return
-	}
-
-	fmt.Fprintf(w, "data: %s\n\n", "connection established")
-	flusher.Flush()
-
-	for {
-		select {
-		case message, ok := <-h.repo.ActivityChan:
-			if !ok {
-				log.Println("not ok")
-				return
-			}
-			log.Println(message)
-			fmt.Fprintf(w, "data: %s\n\n", message)
-			flusher.Flush()
-		case <-r.Context().Done():
-			return
-		}
 	}
 }

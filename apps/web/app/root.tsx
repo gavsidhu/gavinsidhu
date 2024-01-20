@@ -13,7 +13,6 @@ import {
 import { Linkedin, Mail } from "lucide-react";
 import stylesheet from "~/globals.css"
 import { Icons } from "./components/icons";
-import { ActivityProvider } from "./hooks/useActivity";
 
 export const links: LinksFunction = () => [
     ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -93,9 +92,7 @@ export default function App() {
                         </div>
                         <div className="flex-1 md:overflow-y-auto md:h-screen flex flex-col">
                             <div className="md:mt-24 mt-8">
-                                <ActivityProvider>
-                                    <Outlet />
-                                </ActivityProvider>
+                                <Outlet />
                             </div>
                         </div>
 

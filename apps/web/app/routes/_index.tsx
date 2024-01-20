@@ -3,7 +3,6 @@ import { useLoaderData, useNavigate } from "@remix-run/react";
 import { useCallback, useEffect, useState } from "react";
 import ActivityFeed from "~/components/ActivityFeed";
 import { Activity } from "~/global";
-import { useActivity } from "~/hooks/useActivity";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "../components/ui/dropdown-menu";
 import { Button } from "../components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -52,7 +51,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Index() {
     const originalData = useLoaderData<typeof loader>();
-    const { data: contextData, setData } = useActivity();
     const [displayData, setDisplayData] = useState(originalData.activities);
     const [query, setQuery] = useState("")
     const [position, setPosition] = useState("all");
@@ -70,24 +68,16 @@ export default function Index() {
         setDisplayData(filteredData);
     }, [position]);
 
-    useEffect(() => {
-        if (contextData?.length === 0) {
-            setData(originalData.activities);
-        }
-    }, [originalData, contextData, setData]);
 
     useEffect(() => {
         applyFilters(originalData.activities);
     }, [originalData, applyFilters]);
 
-    useEffect(() => {
-        applyFilters(contextData);
-    }, [contextData, applyFilters]);
 
     const handleClearSearch = () => {
         setQuery("");
         setNoResults(false)
-        setData(originalData.activities);
+        setDisplayData(originalData.activities)
     };
 
     if (!originalData || originalData.activities?.length === 0 || originalData.activities === null) {
@@ -100,7 +90,7 @@ export default function Index() {
         <div>
             <div>
                 <div className="sticky w-full top-0 z-10 bg-black px-3 py-2 md:px-10 space-y-2">
-                    <Search position={position} setPosition={setPosition} query={query} setQuery={setQuery} clearSearch={handleClearSearch} setNoResults={setNoResults} />
+                    <Search position={position} setPosition={setPosition} query={query} setQuery={setQuery} clearSearch={handleClearSearch} setNoResults={setNoResults} setDisplayData={setDisplayData} />
                     <PaginationBar totalCount={originalData.totalCount} pageNumber={originalData.page} pageSize={originalData.pageSize} />
                 </div>
                 <div className="px-6">
@@ -125,15 +115,15 @@ type SearchProps = {
     query: string
     setQuery: React.Dispatch<React.SetStateAction<string>>
     setNoResults: React.Dispatch<React.SetStateAction<boolean>>
+    setDisplayData: React.Dispatch<React.SetStateAction<Activity>[]>
 
 };
 
 
-function Search({ position, setPosition, query, setQuery, clearSearch, setNoResults }: SearchProps) {
-    const { setData } = useActivity()
-
+function Search({ position, setPosition, query, setQuery, clearSearch, setNoResults, setDisplayData }: SearchProps) {
     const handleSearch = async () => {
         if (query === "") {
+            clearSearch()
             return
         }
         const response = await fetch("/search?" + new URLSearchParams({ q: query }), {
@@ -143,10 +133,10 @@ function Search({ position, setPosition, query, setQuery, clearSearch, setNoResu
         const data = await response.json() as Activity[]
 
         if (!data) {
-            setData([])
+            setDisplayData([])
             setNoResults(true)
         } else {
-            setData(data)
+            setDisplayData(data)
         }
     }
 
@@ -171,7 +161,7 @@ function Search({ position, setPosition, query, setQuery, clearSearch, setNoResu
                         <SearchIcon className="h-5 w-5 text-gray-400" />
                     </Button>
                     {query && (
-                        <Button onClick={clearSearch} variant="ghost">
+                        <Button onClick={clearSearch} variant="ghost" className="ml-1.5">
                             Clear
                         </Button>
                     )}
