@@ -7,6 +7,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuSep
 import { Button } from "../components/ui/button";
 import { Input } from "~/components/ui/input";
 import { ChevronLeftIcon, ChevronRightIcon, ListFilter, SearchIcon } from "lucide-react";
+import rateLimiter, { getIpAddress } from "~/lib/rateLimiter";
 
 export const meta: MetaFunction = () => {
     return [
@@ -28,6 +29,12 @@ export const meta: MetaFunction = () => {
 
 
 export async function loader({ request }: LoaderFunctionArgs) {
+    const ipAddress = getIpAddress(request)
+    console.log("IP: ", ipAddress)
+    if (!await rateLimiter(ipAddress)) {
+        throw new Response("Rate limit exceeded", { status: 429 });
+    }
+
     const url = new URL(request.url);
     const page = url.searchParams.get('page') || 1;
     const pageSize = url.searchParams.get('pageSize') || 15;
