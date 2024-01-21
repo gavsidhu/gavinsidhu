@@ -28,6 +28,10 @@ jobs:
           /bin/bash -c "GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main main.go"
         working-directory: apps/api
 
+      - name: Zip the deployment
+        run: zip deployment.zip main
+        working-directory: apps/api
+
       - name: Deploy to AWS Lambda
         env:
           AWS_REGION: 'us-west-1'
