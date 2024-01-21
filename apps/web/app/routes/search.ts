@@ -1,7 +1,12 @@
 import { LoaderFunction, json } from '@remix-run/node';
+import rateLimiter, { getIpAddress } from '~/lib/rateLimiter';
 
 export const loader: LoaderFunction = async ({ request }) => {
     try {
+        const ipAddress = getIpAddress(request)
+        if (!await rateLimiter(ipAddress)) {
+            throw new Response("Rate limit exceeded", { status: 429 });
+        }
         const serverUrl = `${process.env.BACKEND_URL as string}/activity/search`;
 
         const requestUrl = new URL(request.url);
