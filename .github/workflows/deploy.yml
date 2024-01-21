@@ -24,7 +24,7 @@ jobs:
 
       - name: Build inside Docker
         run: |
-          docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:1.2.4 \
+          docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:1.20.4 \
           /bin/bash -c "GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main main.go"
         working-directory: apps/api
 
