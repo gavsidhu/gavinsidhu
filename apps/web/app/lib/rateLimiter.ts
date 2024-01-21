@@ -24,8 +24,8 @@ export function getIpAddress(request: Request) {
 }
 
 export default async function rateLimiter(ip: string) {
-    const limit = 50;
-    const timeWindow = 10 * 60 * 1000;
+    const limit = 15;
+    const timeWindow = 5 * 60 * 1000;
 
     const result = await dbPool.query(`
         SELECT request_count, last_request
