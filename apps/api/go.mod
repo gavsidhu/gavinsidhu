@@ -5,7 +5,6 @@ go 1.20
 require (
 	github.com/aws/aws-lambda-go v1.45.0
 	github.com/jackc/pgx/v5 v5.5.1
-	github.com/joho/godotenv v1.5.1
 )
 
 require (

@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -25,21 +26,21 @@ func NewActivityHandler(pool *pgxpool.Pool) *ActivityHandler {
 	}
 }
 
-func (h *ActivityHandler) LambdaHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	switch request.HTTPMethod {
+func (h *ActivityHandler) LambdaHandler(ctx context.Context, request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
+	log.Println("Method: ", request.RequestContext.HTTP.Method)
+	log.Println("Path: ", request.RawPath)
+
+	switch request.RequestContext.HTTP.Method {
 	case "GET":
-		if request.Path == "/activity" {
+		if request.RawPath == "/gavinsidhu/activity" {
 			return h.GetAllActivity(ctx, request)
 		}
-		if request.Path == "/" {
-			return h.Hello(ctx, request)
-		}
 	case "POST":
-		if request.Path == "/activity" {
+		if request.RawPath == "/gavinsidhu/activity" {
 			return h.AddActivity(ctx, request)
 		}
 
-		if request.Path == "/activity/search" {
+		if request.RawPath == "/gavinsidhu/activity/search" {
 			return h.SearchActivity(ctx, request)
 		}
 	}
@@ -50,16 +51,8 @@ func (h *ActivityHandler) LambdaHandler(ctx context.Context, request events.APIG
 	}, nil
 }
 
-func (h *ActivityHandler) Hello(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	return events.APIGatewayProxyResponse{
-		StatusCode: http.StatusUnauthorized,
-		Body:       "Hello",
-		Headers:    map[string]string{"Content-Type": "application/json"},
-	}, nil
-}
-
-func (h *ActivityHandler) AddActivity(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	token := request.Headers["Authorization"]
+func (h *ActivityHandler) AddActivity(ctx context.Context, request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
+	token := request.Headers["authorization"]
 
 	expectedToken := os.Getenv("AUTH_TOKEN")
 	if token != expectedToken {
@@ -106,8 +99,8 @@ func (h *ActivityHandler) AddActivity(ctx context.Context, request events.APIGat
 	}, nil
 }
 
-func (h *ActivityHandler) GetAllActivity(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	token := request.Headers["Authorization"]
+func (h *ActivityHandler) GetAllActivity(ctx context.Context, request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
+	token := request.Headers["authorization"]
 
 	expectedToken := os.Getenv("AUTH_TOKEN")
 	if token != expectedToken {
@@ -181,8 +174,8 @@ func (h *ActivityHandler) GetAllActivity(ctx context.Context, request events.API
 	}, nil
 }
 
-func (h *ActivityHandler) SearchActivity(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	token := request.Headers["Authorization"]
+func (h *ActivityHandler) SearchActivity(ctx context.Context, request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
+	token := request.Headers["authorization"]
 
 	expectedToken := os.Getenv("AUTH_TOKEN")
 	if token != expectedToken {
