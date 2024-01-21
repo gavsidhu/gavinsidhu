@@ -28,7 +28,7 @@ func (r *ActivityRepository) AddActivity(ctx context.Context, activity models.Cr
 
 func (r *ActivityRepository) GetAllActivity(ctx context.Context, page int, pageSize int) ([]models.Activity, error) {
 	offset := (page - 1) * pageSize
-	rows, err := r.DB.Query(ctx, "SELECT id, title, type, url, message, created_at, updated_at FROM activity LIMIT $1 OFFSET $2", pageSize, offset)
+	rows, err := r.DB.Query(ctx, "SELECT id, title, type, url, message, created_at, updated_at FROM activity ORDER BY created_at DESC LIMIT $1 OFFSET $2", pageSize, offset)
 	if err != nil {
 		return nil, err
 	}
