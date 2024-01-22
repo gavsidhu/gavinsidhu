@@ -24,6 +24,9 @@ export function getIpAddress(request: Request) {
 }
 
 export default async function rateLimiter(ip: string) {
+    if (ip === "unknown") {
+        return true
+    }
     const limit = 15;
     const timeWindow = 5 * 60 * 1000;
 
