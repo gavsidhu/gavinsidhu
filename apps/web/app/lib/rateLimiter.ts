@@ -15,7 +15,7 @@ export function getIpAddress(request: Request) {
         request.headers.get('Forwarded') ||
         request.headers.get('DO-Connecting-IP') ||
         request.headers.get('oxygen-buyer-ip') ||
-        request.headers.get('x-forwarded-for') || // keeping existing ones
+        request.headers.get('x-forwarded-for') ||
         request.headers.get("x-vercel-forwarded-for") ||
         request.headers.get('x-real-ip') ||
         request.headers.get('cf-connecting-ip') ||
@@ -25,10 +25,10 @@ export function getIpAddress(request: Request) {
 
 export default async function rateLimiter(ip: string) {
     if (ip === "unknown") {
-        return true
+        return true;
     }
     const limit = 15;
-    const timeWindow = 5 * 60 * 1000;
+    const timeWindow = 7 * 60 * 1000;
 
     const result = await dbPool.query(`
         SELECT request_count, last_request
@@ -42,15 +42,24 @@ export default async function rateLimiter(ip: string) {
         const { request_count, last_request } = result.rows[0];
         const lastRequestTime = new Date(last_request).getTime();
 
-        if (currentTime - lastRequestTime < timeWindow && request_count >= limit) {
-            return false;
-        }
+        if (currentTime - lastRequestTime < timeWindow) {
+            if (request_count >= limit) {
+                return false;
+            }
 
-        await dbPool.query(`
-            UPDATE rate_limits
-            SET request_count = request_count + 1, last_request = NOW()
-            WHERE identifier = $1
-        `, [ip]);
+            await dbPool.query(`
+                UPDATE rate_limits
+                SET request_count = request_count + 1, last_request = NOW()
+                WHERE identifier = $1
+            `, [ip]);
+        } else {
+            // Resetting the request count after the time window has passed
+            await dbPool.query(`
+                UPDATE rate_limits
+                SET request_count = 1, last_request = NOW()
+                WHERE identifier = $1
+            `, [ip]);
+        }
     } else {
         await dbPool.query(`
             INSERT INTO rate_limits (identifier, request_count, last_request)
@@ -60,3 +69,4 @@ export default async function rateLimiter(ip: string) {
 
     return true;
 }
+
